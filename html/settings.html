@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Settings</title>
+    <link rel="stylesheet" href="../css/settings.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        nav {
+            width: 280px;
+            height: 100%; /* Ensures the sidebar takes up the full height */
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #FFFFFF;
+            overflow-y: auto; /* Enable vertical scrolling */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            scrollbar-width: thin; /* Makes the scrollbar thinner (for modern browsers) */
+            scrollbar-color: #A52424 #FFFFFF; /* Custom scrollbar colors */
+            transition: width 0.3s ease; /* Smooth transition for responsive resizing */
+        }
+    
+        /* Custom Scrollbar Styling for Webkit Browsers */
+        nav::-webkit-scrollbar {
+            width: 8px; /* Width of the scrollbar */
+        }
+    
+        nav::-webkit-scrollbar-thumb {
+            background-color: #A52424; /* Scrollbar thumb color */
+            border-radius: 10px; /* Rounded corners for the thumb */
+        }
+    
+        nav::-webkit-scrollbar-track {
+            background-color: #FFFFFF; /* Scrollbar track color */
+        }
+    
+        /* Adjustments for Tablet Screens */
+        @media (max-width: 768px) {
+            nav {
+                width: 200px; /* Narrower sidebar */
+            }
+        }
+    
+        /* Adjustments for Mobile Screens */
+        @media (max-width: 480px) {
+            nav {
+                width: 100px; /* Even more compact sidebar */
+            }
+    
+            nav::-webkit-scrollbar {
+                width: 6px; /* Thinner scrollbar for smaller screens */
+            }
+    
+            nav::-webkit-scrollbar-thumb {
+                background-color: #A52424;
+            }
+        }
+        
+        /* Style for the role indicator */
+        .role-indicator {
+            background-color: #A52424;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        
+        .role-indicator span {
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="img">
+            <img src="../images/lakbayrizal.png" alt="logo">
+        </div>
+    
+        <div class="links-container">
+            <a class="link" href="../html/dashboard.html"><i class="fas fa-layer-group"></i>Dashboard</a>
+            <a class="link" href="../html/traveler_table.html"><i class="fas fa-users"></i>User Management</a>
+            <a class="link" href="../html/applicant_management.html"><i class="fas fa-user-check"></i>Applicant Management</a>
+            <a class="link" href="../html/payment_management.html"><i class="fas fa-credit-card"></i>Payment Management</a>
+            <a class="link" href="../html/booking_management.html"><i class="fas fa-calendar-check"></i>Booking Management</a>
+            <a class="link" href="../html/itinerary_template.html"><i class="fas fa-route"></i>Itinerary Template</a>
+            <a class="link" href="../html/feedbacks.html"><i class="fas fa-comment-dots"></i>Feedbacks</a>
+            <a class="link" href="../html/archive_traveler.html"><i class="fas fa-archive"></i>Archives</a>
+            <a class="link" href="../html/reports.html"><i class="fas fa-chart-bar"></i>Reports</a>
+            <a class="link" href="../html/settings.html" id="settings"><i class="fas fa-cogs"></i>Settings</a>
+        </div>
+    </nav>
+
+        <div class="banner"></div>
+        <div class="main-content">
+            
+
+            <div class="settings-sections">
+                <div class="settings-section">
+                    <h2>Account Management</h2>
+                    <form id="accountForm" onsubmit="return false;">
+                        <div class="form-group">
+                            <label for="admin-id">Admin ID</label>
+                            <input type="text" id="admin-id" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="municipality">Municipality/Location</label>
+                            <input type="text" id="municipality" readonly>
+                        </div>
+                        <!-- Add province field for superadmins -->
+                        <div class="form-group" id="provinceGroup">
+                            <label for="province">Province</label>
+                            <input type="text" id="province" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" readonly>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="settings-section">
+                    <h2>User Activity Notification</h2>
+                    <p class="section-description">Adjust the items that fits to your liking for better experience of work</p>
+                    <div class="notification-toggles">
+                        <div class="toggle-item">
+                            <span>Tour Guide Notification</span>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="toggle-item">
+                            <span>New User Notification</span>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h2>App Settings</h2>
+                    <p class="section-description">Configure application settings and preferences</p>
+                    <button class="action-button" id="appSettingsBtn">App Settings</button>
+                    <br>
+                    <br>
+                    <h2>Promotions</h2>
+                    <p class="section-description">Add or remove promotions to the application.</p>
+                    <button class="action-button" onclick="window.location.href='../html/promotions.html'">Manage Promotions</button>
+                </div>
+
+                <div class="settings-section">
+                    <h2>Backup</h2>
+                    <p class="section-description">Create a backup for important data that can be downloaded as CSV or JSON files</p>
+                    <button class="action-button" id="backupDataBtn">Backup Data</button>
+                </div>
+
+                <div class="settings-section">
+                    <h2>Import Data</h2>
+                    <p class="section-description">Import data from CSV or JSON files to update Firestore tables</p>
+                    <button class="action-button" id="importDataBtn">Import Data</button>
+                </div>
+
+                <div class="settings-section">
+                    <h2>Activity Log</h2>
+                    <p class="section-description">Keep track of all your actions across the system and monitor any activities or security on authorized access to your account</p>
+                    <button class="action-button" id="activityLogBtn">Activity Log</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Backup Modal -->
+    <div id="backupModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Select data for backup</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="date-selector">
+                    <label for="backupDate">Date</label>
+                    <select id="backupDate" class="form-control">
+                        <option value="all">All Time</option>
+                        <option value="today">Today</option>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                        <option value="year">This Year</option>
+                    </select>
+                </div>
+                <div class="backup-options">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="travelerProfile">
+                        <label for="travelerProfile">Traveler Profile</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="tourGuideProfile">
+                        <label for="tourGuideProfile">Tour Guide Profile</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="bookingHistory">
+                        <label for="bookingHistory">Booking History</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="archivedTraveler">
+                        <label for="archivedTraveler">Archived Traveler Profile</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="archivedTourGuide">
+                        <label for="archivedTourGuide">Archived Tour Guide Profile</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="archivedItinerary">
+                        <label for="archivedItinerary">Archived Itinerary</label>
+                    </div>
+                </div>
+                <div class="file-format">
+                    <label for="fileFormat">Select File Format:</label>
+                    <select id="fileFormat" class="form-control">
+                        <option value="csv">CSV</option>
+                        <option value="json">JSON</option>
+                    </select>
+                </div>
+                <button id="backupButton" class="backup-btn">Backup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import Modal -->
+    <div id="importModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Import data to Firestore</h2>
+                <span class="close" id="importCloseBtn">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="file-input">
+                    <label for="fileInput">Select CSV or JSON file:</label>
+                    <input type="file" id="fileInput" accept=".csv,.json" class="form-control">
+                </div>
+                <div class="import-options">
+                    <h3>Select destination table:</h3>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="importTravelerProfile">
+                        <label for="importTravelerProfile">Traveler Profile</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="importTourGuideProfile">
+                        <label for="importTourGuideProfile">Tour Guide Profile</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="importBookingHistory">
+                        <label for="importBookingHistory">Booking History</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="importArchivedTraveler">
+                        <label for="importArchivedTraveler">Archived Traveler Profile</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="importArchivedTourGuide">
+                        <label for="importArchivedTourGuide">Archived Tour Guide Profile</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="importArchivedItinerary">
+                        <label for="importArchivedItinerary">Archived Itinerary</label>
+                    </div>
+                </div>
+                <div id="importPreview" class="import-preview"></div>
+                <button id="importButton" class="import-btn">Import</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../scripts/settings.js"></script>
+</body>
+</html>

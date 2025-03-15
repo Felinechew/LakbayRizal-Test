@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destination Management</title>
+  <link rel="stylesheet" href="../css/archive_itinerarytemplate.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <!-- Firebase SDKs -->
+  <script type="module" src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/10.0.0/firebase-storage.js"></script>
+
+  <!-- Firebase Initialization -->
+  <script type="module" src="../scripts/firebase.js"></script>
+</head>
+<style>
+   nav {
+        width: 280px;
+        height: 100%; 
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #FFFFFF;
+        overflow-y: auto; 
+        overflow-x: hidden; 
+        scrollbar-width: none; 
+        scrollbar-color: #A52424 #FFFFFF; 
+        transition: width 0.3s ease;
+    }
+
+
+    nav::-webkit-scrollbar {
+        width: 8px; 
+    }
+
+    nav::-webkit-scrollbar-thumb {
+        background-color: #A52424; /* Scrollbar thumb color */
+        border-radius: 10px; /* Rounded corners for the thumb */
+    }
+
+    nav::-webkit-scrollbar-track {
+        background-color: #FFFFFF; /* Scrollbar track color */
+    }
+
+    /* Adjustments for Tablet Screens */
+    @media (max-width: 768px) {
+        nav {
+            width: 200px; /* Narrower sidebar */
+        }
+    }
+
+    /* Adjustments for Mobile Screens */
+    @media (max-width: 480px) {
+        nav {
+            width: 100px; /* Even more compact sidebar */
+        }
+
+        nav::-webkit-scrollbar {
+            width: 6px; /* Thinner scrollbar for smaller screens */
+        }
+
+        nav::-webkit-scrollbar-thumb {
+            background-color: #A52424;
+        }
+    }
+</style> 
+<body>
+
+<nav>
+  <div class="img">
+      <img src="../images/lakbayrizal.png" alt="logo">
+  </div>
+
+  <div class="links-container">
+      <a class="link" href="../html/dashboard.html" id="dashboard" ><i class="fas fa-layer-group"></i>Dashboard</a>
+      <a class="link" href="../html/traveler_table.html"><i class="fas fa-users"></i>User Management</a>
+      <a class="link" href="../html/applicant_management.html"><i class="fas fa-user-check"></i>Applicant Management</a>
+      <a class="link" href="../html/payment_managemet"><i class="fas fa-credit-card"></i>Payment Management</a>
+      <a class="link" href="../html/booking_management"><i class="fas fa-calendar-check"></i>Booking Management</a>
+      <a class="link" href="../html/itinerary_template.html"><i class="fas fa-route"></i>Itinerary Template</a>
+      <a class="link" href="../html/feedbacks"><i class="fas fa-comment-dots"></i>Feedbacks</a>
+      <a class="link" href="../html/archives"><i class="fas fa-archive"></i>Archives</a>
+      <a class="link" href="../html/reports"><i class="fas fa-chart-bar"></i>Reports</a>
+      <a class="link" href="../html/settings"><i class="fas fa-cogs"></i>Settings</a>
+  </div>
+</nav>
+  
+  <div class="main-content">
+    <div class="banner"></div>
+    <div>
+      <select id="entityDropdown" onchange="switchEntity()">
+        <option value="travelers">Travelers</option>
+        <option value="tourguides">Tour Guides</option>
+        <option value="admins">Admins</option> 
+        <option value="payments">Payments</option> 
+        <option value="bookings">Bookings</option> 
+        <option value="destinations" selected>Destinations</option> 
+        <option value="feedbacks">Feedbacks</option> 
+      </select>
+  </div>
+    <div class="main-container">
+  
+      <div class="content">
+        <p>Destinations</p>
+      </div>
+    
+      <div class="right-side">
+        <input type="text" id="searchInput" placeholder="Search Destination" oninput="searchDestination()">
+      </div>
+    </div>
+    
+    <div class="destination-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Municipality</th>
+          <th>Address</th>
+          <th>Type</th>
+          <th>Avg Price</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+          <th>Description</th>
+          <th>Date Added</th>
+          <th>Actions</th>
+          
+        </tr>
+      </thead>
+      
+      <tbody id="destinationList">
+        <!-- Dynamic destination rows will be inserted here -->
+      </tbody>
+
+      <tfoot>
+        <tr>
+          <td colspan="10">
+            <div class="table-pagination">
+              <button id="prevPage" class="pagination-button">Previous</button>
+              <span class="page-info">
+                Page <span id="currentPage">1</span> of <span id="totalPages">1</span>
+              </span>
+              <button id="nextPage" class="pagination-button">Next</button>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
+
+    </table>
+  </div>
+
+  <div id="noResultsMessage" style="display: none; text-align: center; margin-top: 20px;">
+    <p>Nothing found</p>
+  </div>
+
+  <!-- View Modal -->
+  <div id="viewModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="red-banner">
+        <h2>Destination Details</h2>
+        <span class="close" id="closeViewModal">&times;</span>
+      </div>
+      
+      <div class="modal-display">
+        <div class="group-1">
+          <div class="profile-section">
+            <img id="viewImage" alt="Destination Image">
+
+            <div class="content-section">
+            <p class="heading">Description:</p>
+            <span class="styled-input" id="viewDescription" readonly></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="group-2">
+        <div class="profile-section-2">
+          <div class="content-section">
+            <p class="heading">Name:</p>
+            <span class="styled-input-2" id="viewName" readonly></span>
+
+            <p class="heading">Municipality:</p>
+            <span class="styled-input-2" id="viewMunicipality" readonly></span>
+
+            <p class="heading">Address:</p>
+            <span class="styled-input-2" id="viewAddress" readonly></span>
+
+            <p class="heading">Type:</p>
+            <span class="styled-input-2" id="viewType" readonly></span>
+            
+            <p class="heading">Average Price:</p>
+            <span class="styled-input-2" id="viewAvgPrice" readonly></span>
+
+            <p class="heading">Latitude:</p>
+            <span class="styled-input-2" id="viewLatitude" readonly></span>
+            
+            <p class="heading">Longitude</p>
+            <span class="styled-input-2" id="viewLongitude" readonly></span>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>
+
+
+</div>
+
+  <!-- Success/Error Message -->
+  <div id="message" style="display: none;"></div>
+
+</div>
+
+<script>
+  function switchEntity() {
+    const entity = document.getElementById("entityDropdown").value;
+    if (entity === "travelers") {
+      window.location.href = "../html/archive_traveler.html";
+    } 
+    else if (entity === "tourguides") {
+      window.location.href = "../html/archive_tourguide.html"; // Navigate to manageadmin.html
+    } else if (entity === "bookings") {
+      window.location.href = "../html/archive_booking.html"; // Navigate to manageadmin.html
+    } else if (entity === "payments") {
+      window.location.href = "../html/archive_payment.html"; // Navigate to manageadmin.html
+    } else if (entity === "feedbacks") {
+      window.location.href = "../html/archive_feedbacks.html"; // Navigate to manageadmin.html
+    }
+    else if (entity === "admins") {
+      window.location.href = "../html/archive_admin.html"; // Navigate to manageadmin.html
+    } 
+    else {
+      // Handle switching back to travelers
+      // This block can be expanded to refresh travelers table if needed
+      console.log("Switched to Tourguides");
+    }
+  }
+</script>
+  <!-- <script type="module" src="archiveitinerarycheckbox.js"></script> -->
+  <script type="module" src="../scripts/archive_itinerarytemplate.js"></script>
+</body>
+</html>

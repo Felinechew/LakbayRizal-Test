@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lakbay Rizal</title>
+  <link rel="icon" href="../images/lakbayrizal.png" type="image/png">
+  <link rel="stylesheet" href="../admin/admin_dashboard.css" />
+  <script type="module" src="../admin/admin_dashboard.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    nav {
+        width: 280px;
+        height: 100%; 
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #FFFFFF;
+        overflow-y: auto; 
+        overflow-x: hidden; 
+        scrollbar-width: thin; 
+        scrollbar-color: #A52424 #FFFFFF; 
+        transition: width 0.3s ease;
+    }
+
+    nav::-webkit-scrollbar {
+        width: 8px; 
+    }
+
+    nav::-webkit-scrollbar-thumb {
+        background-color: #A52424; /* Scrollbar thumb color */
+        border-radius: 10px; /* Rounded corners for the thumb */
+    }
+
+    nav::-webkit-scrollbar-track {
+        background-color: #FFFFFF; /* Scrollbar track color */
+    }
+
+    /* Adjustments for Tablet Screens */
+    @media (max-width: 768px) {
+        nav {
+            width: 200px; /* Narrower sidebar */
+        }
+    }
+
+    /* Adjustments for Mobile Screens */
+    @media (max-width: 480px) {
+        nav {
+            width: 100px; /* Even more compact sidebar */
+        }
+
+        nav::-webkit-scrollbar {
+            width: 6px; /* Thinner scrollbar for smaller screens */
+        }
+
+        nav::-webkit-scrollbar-thumb {
+            background-color: #A52424;
+        }
+    }
+</style> 
+</head>
+<body>
+
+    <nav>
+        <div class="img">
+          <img src="../images/lakbayrizal.png" alt="logo">
+        </div>
+      
+        <div class="links-container">
+          <a class="link active" href="../admin/admin_dashboard.html" id="dashboard"><i class="fas fa-layer-group"></i>Dashboard</a>
+          <a class="link" href="../admin/admin_usermanagement.html"><i class="fas fa-users"></i>User Management</a>
+          <a class="link" href="../admin/admin_tgapplicants.html"><i class="fas fa-user-check"></i>Applicant Management</a>
+          <a class="link" href="../html/itinerary_template.html"><i class="fas fa-route"></i>Itinerary Template</a>
+          <a class="link" href="../html/archives"><i class="fas fa-archive"></i>Archives</a>
+          <a class="link" href="../html/reports"><i class="fas fa-chart-bar"></i>Reports</a>
+          <a class="link" href="../html/settings"><i class="fas fa-cogs"></i>Settings</a>
+        </div>
+      </nav>
+      
+
+
+<!--main content-->
+<div class="main-content">
+
+<div class="banner">
+    <h1>Dashboard</h1>
+    <p>Streamline operations and improve traveler's experiences.<br>
+    Let's make every journey extraordinary!</p>
+</div>
+    
+<div class="container-travelers">
+    <i class="fa-solid fa-users" id="container-icon"></i>
+    <p class="registered-traveler">Registered Traveler</p>
+</div>
+
+<div class="container-travelers">
+    <i class="fa-solid fa-user-tie" id="container-icon"></i>
+    <p class="registered-tourguide">Registered Tour Guides</p>
+</div>
+
+<div class="container-travelers">
+    <i class="fa-solid fa-clipboard" id="container-icon"></i>
+    <p class="tourguide-applicants">Tour Guide Applicants</p>
+</div>
+
+<div class="container-travelers">
+    <i class="fa-solid fa-location-pin" id="container-icon"></i>
+    <p class="generated-itineraries">Generated Itineraries</p>
+    <a class="view-generated" href="view">View</a>
+</div>
+
+</div>
+
+
+<script>
+const dashboard = document.getElementById("dashboard");
+const links = document.querySelectorAll(".link");
+
+links.forEach(link => {
+    link.addEventListener("mouseover", () => {
+        // Ensure that only the links other than the dashboard trigger the color change
+        if (!link.contains(dashboard)) {
+            dashboard.style.backgroundColor = "rgba(165, 36, 36, 0.2)";
+        }
+    });
+
+    link.addEventListener("mouseout", () => {
+        // Reset the background color back when mouse leaves
+        dashboard.style.backgroundColor = "rgba(165, 36, 36, 0.2)";
+    });
+});
+</script>
+
+  <button id="logout">Logout</button>
+</body>
+</html>

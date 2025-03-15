@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakbay Rizal</title>
+    <link rel="icon" href="../images/lakbayrizal.png" type="image/png">
+    <link rel="stylesheet" href="../css/booking_management.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<style>
+nav {
+      width: 280px;
+          height: 100%; /* Ensures the sidebar takes up the full height */
+          position: fixed;
+          top: 0;
+          left: 0;
+          background-color: #FFFFFF;
+          overflow-y: auto; /* Enable vertical scrolling */
+          overflow-x: hidden; /* Prevent horizontal scrolling */
+          scrollbar-width: thin; /* Makes the scrollbar thinner (for modern browsers) */
+          scrollbar-color: #A52424 #FFFFFF; /* Custom scrollbar colors */
+          transition: width 0.3s ease; /* Smooth transition for responsive resizing */
+      }
+  
+      /* Custom Scrollbar Styling for Webkit Browsers */
+      nav::-webkit-scrollbar {
+          width: 8px; /* Width of the scrollbar */
+      }
+  
+      nav::-webkit-scrollbar-thumb {
+          background-color: #A52424; /* Scrollbar thumb color */
+          border-radius: 10px; /* Rounded corners for the thumb */
+      }
+  
+      nav::-webkit-scrollbar-track {
+          background-color: #FFFFFF; /* Scrollbar track color */
+      }
+  
+      /* Adjustments for Tablet Screens */
+      @media (max-width: 768px) {
+          nav {
+              width: 200px; /* Narrower sidebar */
+          }
+      }
+  
+      /* Adjustments for Mobile Screens */
+      @media (max-width: 480px) {
+          nav {
+              width: 100px; /* Even more compact sidebar */
+          }
+  
+          nav::-webkit-scrollbar {
+              width: 6px; /* Thinner scrollbar for smaller screens */
+          }
+  
+          nav::-webkit-scrollbar-thumb {
+              background-color: #A52424;
+          }
+      }
+</style>
+<body>
+
+    <nav>
+        <div class="img">
+            <img src="../images/lakbayrizal.png" alt="logo">
+        </div>
+    
+        <div class="links-container">
+            <a class="link" href="../html/dashboard.html"><i class="fas fa-layer-group"></i>Dashboard</a>
+            <a class="link" href="../html/traveler_table.html"><i class="fas fa-users"></i>User Management</a>
+            <a class="link" href="../html/applicant_management.html"><i class="fas fa-user-check"></i>Applicant Management</a>
+            <a class="link" href="../html/payment_management.html"   ><i class="fas fa-credit-card"></i>Payment Management</a>
+            <a class="link" href="../html/booking_management.html" id="bookingmanagement"><i class="fas fa-calendar-check"></i>Booking Management</a>
+            <a class="link" href="../html/itinerary_template.html"><i class="fas fa-route"></i>Itinerary Template</a>
+            <a class="link" href="../html/feedbacks.html"><i class="fas fa-comment-dots"></i>Feedbacks</a>
+            <a class="link" href="../html/archive_traveler.html"><i class="fas fa-archive"></i>Archives</a>
+            <a class="link" href="../html/reports.html"><i class="fas fa-chart-bar"></i>Reports</a>
+            <a class="link" href="../html/settings.html"><i class="fas fa-cogs"></i>Settings</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="banner"></div>
+
+        <div class="container">
+            <div class="content">
+                <p>Booking Records</p>
+            </div>
+        </div>
+
+
+            <table id="bookingTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Tour Guide</th>
+                        <th>Destination</th>
+                        <th>Date of Booking</th>
+                        <th>Date of Trip</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+            <div id="viewModal" class="modal" style="display:none;">
+                <div class="modal-content">
+                    <div class="red-banner">
+                        <h2>Booking Details</h2>
+                        <span class="close" id="viewClose">&times;</span>
+                    </div>
+
+                    <div class="modal-display">
+                        <div class="group-1">
+                            <div class="profile-section">
+                                <div class="content-section">
+
+                                    <p class="heading">Traveler:</p>
+                                    <span class="styled-input" id="viewName"></span>
+
+                                    <p class="heading">Tour Guide:</p>
+                                    <span class="styled-input" id="viewTourGuide"></span>
+
+                                    <p class="heading">Destination:</p>
+                                    <span class="styled-input" id="viewDestination"></span>
+
+                                    <p class="heading">Date of Booking:</p>
+                                    <span class="styled-input" id="viewDateBooking"></span>
+
+                                    <p class="heading">Date of Trip:</p>
+                                    <span class="styled-input" id="viewDateTrip"></span>
+
+                                    <p class="heading">Status:</p>
+                                    <span class="styled-input" id="viewStatus"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+
+    <script type="module" src="../scripts/booking_management.js"></script>
+</body>
+</html>

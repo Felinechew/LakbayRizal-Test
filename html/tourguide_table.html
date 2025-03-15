@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lakbay Rizal</title>
+<link rel="icon" href="../images/lakbayrizal.png" type="image/png">
+<link rel="stylesheet" href="../css/tourguide_table.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-storage.js"></script>
+
+<!-- Firebase Initialization -->
+<script type="module" src="../scripts/firebase.js"></script>
+
+<style>
+  
+  nav {
+      width: 280px;
+          height: 100%; /* Ensures the sidebar takes up the full height */
+          position: fixed;
+          top: 0;
+          left: 0;
+          background-color: #FFFFFF;
+          overflow-y: auto; /* Enable vertical scrolling */
+          overflow-x: hidden; /* Prevent horizontal scrolling */
+          scrollbar-width: thin; /* Makes the scrollbar thinner (for modern browsers) */
+          scrollbar-color: #A52424 #FFFFFF; /* Custom scrollbar colors */
+          transition: width 0.3s ease; /* Smooth transition for responsive resizing */
+      }
+  
+      /* Custom Scrollbar Styling for Webkit Browsers */
+      nav::-webkit-scrollbar {
+          width: 8px; /* Width of the scrollbar */
+      }
+  
+      nav::-webkit-scrollbar-thumb {
+          background-color: #A52424; /* Scrollbar thumb color */
+          border-radius: 10px; /* Rounded corners for the thumb */
+      }
+  
+      nav::-webkit-scrollbar-track {
+          background-color: #FFFFFF; /* Scrollbar track color */
+      }
+  
+      /* Adjustments for Tablet Screens */
+      @media (max-width: 768px) {
+          nav {
+              width: 200px; /* Narrower sidebar */
+          }
+      }
+  
+      /* Adjustments for Mobile Screens */
+      @media (max-width: 480px) {
+          nav {
+              width: 100px; /* Even more compact sidebar */
+          }
+  
+          nav::-webkit-scrollbar {
+              width: 6px; /* Thinner scrollbar for smaller screens */
+          }
+  
+          nav::-webkit-scrollbar-thumb {
+              background-color: #A52424;
+          }
+      }
+</style>
+</head>
+<body>
+
+  <nav>
+    <div class="img">
+        <img src="../images/lakbayrizal.png" alt="logo">
+    </div>
+
+    <div class="links-container">
+        <a class="link" href="../html/dashboard.html"><i class="fas fa-layer-group"></i>Dashboard</a>
+        <a class="link" href="../html/traveler_table.html" id="usermanagement" ><i class="fas fa-users"></i>User Management</a>
+        <a class="link" href="../html/applicant_management.html"><i class="fas fa-user-check"></i>Applicant Management</a>
+        <a class="link" href="../html/payment_management.html"><i class="fas fa-credit-card"></i>Payment Management</a>
+        <a class="link" href="../html/booking_management.html"><i class="fas fa-calendar-check"></i>Booking Management</a>
+        <a class="link" href="../html/itinerary_template.html"><i class="fas fa-route"></i>Itinerary Template</a>
+        <a class="link" href="../html/feedbacks.html"><i class="fas fa-comment-dots"></i>Feedbacks</a>
+        <a class="link" href="../html/archive_traveler.html"><i class="fas fa-archive"></i>Archives</a>
+        <a class="link" href="../html/reports.html"><i class="fas fa-chart-bar"></i>Reports</a>
+        <a class="link" href="../html/settings.html"><i class="fas fa-cogs"></i>Settings</a>
+    </div>
+</nav>
+
+  <!--Main Content-->
+<div class="main-content">
+  <div class="banner"></div>
+    
+    <div class="container">
+        <div class="content">
+          <p>Tour Guides</p>
+        </div>
+      
+    <!--Dropdown-->
+    <div class="inline-controls">
+      <select id="entityDropdown" onchange="switchEntity()">
+        <option value="tourguides" selected>Tour Guides</option>
+        <option value="travelers">Travelers</option>
+        <option value="admins">Admins</option>
+      </select>
+
+      <div id="searchBarContainer">
+            <input type="text" id="searchInput" placeholder="Search" oninput="searchTourguide()">
+        </div>
+    </div>
+  </div>
+
+  <!-- Tour Guide List -->
+  <table>
+    <thead>
+      <tr>
+        <th>Tour Guide ID</th>
+        <th>First Name</th>
+        <th>Middle Name</th>
+        <th>Last Name</th>
+        <th>Municipality</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>Sex</th>
+        <th>Destination</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="tourguideList">
+      <!-- Dynamic tour guide rows will be inserted here -->
+    </tbody>
+  </table>
+  <div id="noResultsMessage" style="display: none; text-align: center; margin-top: 20px;">
+    <p>Nothing found</p>
+  </div>
+</div>
+
+<!-- View Modal -->
+<div id="viewModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <div class="red-banner">
+      <h2>Tour Guide Details</h2>
+      <span class="close" id="closeViewModal">&times;</span>
+    </div>  
+
+    <div class="modal-display">
+      <!-- Group 1: Profile & Tour Guide Info -->
+      <div class="group-1">
+        <div class="profile-section">
+          <img id="viewProfilePicture" alt="Profile Picture">
+
+          <div class="content-section">
+            <p class="heading">Tour Guide ID:</p>
+            <span class="styled-input" id="viewtourguideId" readonly></span>
+
+            <p class="heading">Municipality:</p>
+            <span class="styled-input" id="viewmunicipality" readonly></span>
+
+            <p class="heading">Destination:</p>
+            <span class="styled-input" id="viewdestination" readonly></span>
+
+            <img id="viewIdPicture" alt="ID Picture">
+          </div>
+        </div>
+      </div>
+
+      <!-- Group 2: Personal Details -->
+      <div class="group-2">
+        <div class="profile-section-2">
+          <div class="content-section">
+            <p class="heading">First Name:</p>
+            <span class="styled-input-2" id="viewfirstName" readonly></span>
+
+            <p class="heading">Middle Name:</p>
+            <span class="styled-input-2" id="viewmiddleName" readonly></span>
+
+            <p class="heading">Last Name:</p>
+            <span class="styled-input-2" id="viewlastName" readonly></span>
+
+            <p class="heading">Age:</p>
+            <span class="styled-input-2" id="viewage" readonly></span>
+
+            <p class="heading">Sex:</p>
+            <span class="styled-input-2" id="viewsex" readonly></span>
+
+            <p class="heading">Tour Guide Rate:</p>
+            <span class="styled-input-2" id="viewtgrate" readonly></span>
+
+            <p class="heading">GCash:</p>
+            <span class="styled-input-2" id="viewgcash" readonly></span>
+
+            <p class="heading">Email:</p>
+            <span class="styled-input-2" id="viewemail" readonly></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div id="editModal" class="modal" style="display: none;">
+  <div class="modal-content-2">
+    <div class="red-banner">
+      <h2>Edit Tour Guide Details</h2>
+      <span class="close" id="closeEditModal">&times;</span>
+    </div>
+
+    <form id="editTourguideForm">
+      <div class="modal-display">
+        <div class="group-1">
+          <div class="profile-section">
+            <img id="currentProfilePicture" alt="Current Profile Picture">
+
+            <div class="content-section">
+              <p class="heading">Tour Guide ID:</p>
+              <span class="styled-input" id="viewtourguideID" readonly></span>
+
+              <p class="heading">Municipality:</p>
+              <select class="styled-input" id="editmunicipality" required>
+                <option value="" disabled selected>Municipality</option>
+                <option value="Angono">Angono</option>
+                <option value="Antipolo">Antipolo</option>
+                <option value="Baras">Baras</option>
+                <option value="Binangonan">Binangonan</option>
+                <option value="Cainta">Cainta</option>
+                <option value="Cardona">Cardona</option>
+                <option value="Jala-Jala">Jala-Jala</option>
+                <option value="Morong">Morong</option>
+                <option value="Pililla">Pililla</option>
+                <option value="Rodriguez">Rodriguez</option>
+                <option value="San Mateo">San Mateo</option>
+                <option value="Tanay">Tanay</option>
+                <option value="Taytay">Taytay</option>
+                <option value="Teresa">Teresa</option>
+              </select>
+
+              <p class="heading">Destination:</p>
+              <input type="text" class="styled-input" id="editdestination" placeholder="Destination" required>
+
+              <img id="currentIdPicture" alt="Current ID Picture">
+            </div>
+          </div>
+        </div>
+
+        <div class="group-3">
+          <div class="profile-section-2">
+            <div class="content-section-1">
+              <p class="heading">First Name:</p>
+              <input type="text" class="styled-input-3" id="editfirstName" placeholder="First Name" required>
+
+              <p class="heading">Middle Name:</p>
+              <input type="text" class="styled-input-3" id="editmiddleName" placeholder="Middle Name">
+
+              <p class="heading">Last Name:</p>
+              <input type="text" class="styled-input-3" id="editlastName" placeholder="Last Name" required>
+
+              <p class="heading">Age:</p>
+              <input type="number" class="styled-input-3" id="editage" placeholder="Age" min="0" required>
+
+              <p class="heading">Sex:</p>
+              <select class="styled-input-3" id="editsex" required>
+                <option value="" disabled selected>Select Sex</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+
+              <p class="heading">Tour Guide Rate:</p>
+              <input type="number" class="styled-input-3" id="edittgrate" placeholder="TgRate" min="0" required>
+
+              <p class="heading">Gcash</p>
+              <input type="number" class="styled-input-3" id="editgcash" placeholder="Gcash Number" required>
+
+              <p class="heading">Email:</p>
+              <input type="email" class="styled-input-3" id="editEmail" readonly>
+
+              <button class="button-submit" type="submit">Update Tour Guide</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- Success/Error Message -->
+<div id="message" style="display: none;"></div>
+
+<!-- Script for Tour Guide Management -->
+<script>
+  function switchEntity() {
+    const entity = document.getElementById("entityDropdown").value;
+    if (entity === "travelers") {
+      window.location.href = "../html/traveler_table.html";
+    } else if (entity === "admins") {
+      window.location.href = "../html/admin_table.html"; // Navigate to manageadmin.html
+    } else {
+      console.log("Switched to Tourguides");
+    }
+  }
+</script>
+<script type="module" src="../scripts/tourguide_table.js"></script>
+</body>
+</html>

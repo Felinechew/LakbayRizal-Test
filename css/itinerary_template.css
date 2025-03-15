@@ -1,0 +1,920 @@
+body {
+  background-color: #F0F0F0;
+  transition: margin-left 0.3s ease;
+  margin: 0px;
+  font-family: 'Poppins', sans-serif;
+}
+
+img {
+  padding: 20px 80px 50px 80px;
+  width: 120px;
+  text-align: center;
+  transition: width 0.3s ease; /* Smooth transition for image size */
+}
+
+#itinerarytemplate {
+  background-color: rgba(165, 36, 36, 0.2);
+  color: #A52424;
+  border-radius: 5px;
+  width: 220px;
+}
+
+.link {
+  display: block;
+  padding: 15px 0px 15px 35px;
+  color: #848490;
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 15px;
+  transition: all 0.3s ease; /* Smooth transition for hover and padding */
+}
+
+.link:hover {
+  color: #A52424;
+  background-color: rgba(165, 36, 36, 0.2);
+  width: 200px;
+  padding-left: 50px;
+  border-radius: 5px;
+}
+
+.link i {
+  font-size: 15px;
+  margin-right: 13px;
+  transition: color 0.3s ease;
+}
+
+.link:hover i {
+  color: #A52424;
+}
+
+/* Media Queries for Responsiveness */
+
+/* Tablet View */
+@media (max-width: 768px) {
+  nav {
+      width: 200px; /* Adjust sidebar width */
+  }
+
+  body {
+      margin-left: 200px; /* Adjust margin for smaller nav */
+  }
+
+  img {
+      width: 100px; /* Adjust logo size */
+      padding: 15px 60px; /* Adjust padding for smaller screens */
+  }
+
+  #itinerarytemplate {
+      width: 180px; /* Adjust width for smaller screens */
+      padding-left: 40px; /* Adjust padding */
+  }
+
+  .link {
+      font-size: 12px; /* Adjust font size */
+      padding: 10px 0px 10px 25px; /* Adjust padding */
+  }
+
+  .link:hover {
+      width: 160px; /* Adjust hover width */
+      padding-left: 35px; /* Adjust hover padding */
+  }
+}
+
+/* Mobile View */
+@media (max-width: 480px) {
+  nav {
+      width: 100px; /* Compact navigation for mobile */
+  }
+
+  body {
+      margin-left: 100px; /* Adjust body margin for mobile */
+  }
+
+  img {
+      width: 80px; /* Smaller logo */
+      padding: 10px; /* Adjust padding */
+  }
+
+  #itinerarytemplate {
+      width: 90px; /* Compact dashboard width */
+      padding-left: 20px; /* Adjust padding */
+  }
+
+  .link {
+      font-size: 10px; /* Smaller font size */
+      padding: 8px 0px 8px 15px; /* Compact padding */
+  }
+
+  .link:hover {
+      width: 90px; /* Compact hover state */
+      padding-left: 25px; /* Adjust hover padding */
+  }
+}
+
+.banner {
+  height: 73px;
+  width: 100%;
+  background-color: #A52424;
+
+}
+
+.main-content{
+  margin-left: 280px;
+}
+
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  padding-bottom: 0px;
+}
+
+.sub-container {
+  flex: 1;
+  padding: 25px;
+  padding-bottom: 0px;
+}
+
+.label-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+h1 {
+  margin: 0px;
+  font-size: 17px;
+}
+
+.add-remove {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px; /* Space between input and buttons */
+}
+
+input[type="text"] {
+  font-size: 11.5px;
+}
+
+#searchTrip, #searchActivity, #searchInput {
+  padding: 0px 15px;
+  color: #848490;
+  height: 34px !important;
+  border-radius: 3px;
+  border: 1px solid rgb(218, 218, 218);
+  font-family: 'Poppins', sans-serif;
+  font-size: 11.5px;
+  box-sizing: border-box; /* Ensures height stays fixed */
+}
+
+#addTrip, #removeTrip, #addActivity, #removeActivity, #addDestinationBtn {
+  padding: 5px 10px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 11.5px;
+  border-radius: 3px;
+  border: 1px solid rgb(218, 218, 218);
+  color: #848490;
+  background-color: white;
+  height: 34px !important;
+  box-sizing: border-box;
+}
+
+#addDestinationBtn {
+  margin: 0px !important;
+}
+
+#searchInput {
+  width: 200px;
+  height: 34px !important;
+  box-sizing: border-box;
+}
+
+
+
+.checkbox-container {
+  background-color: white;
+  height: 180px;
+  border-radius: 5px;
+  border: 1px solid rgb(218, 218, 218);
+  overflow-y: auto;
+  scrollbar-width: none;
+  margin: 25px 0;
+  margin-bottom: 0px;
+  padding: 15px 20px 15px 25px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+input[type="checkbox"] {
+  margin: 0;
+  width: 16px;
+  height: 16px;
+}
+
+label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  color: #848490;
+  padding: 7px; /* Remove padding to keep it next to the checkbox */
+}
+
+.activity-item, .trip-item{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Modal and general styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 10px;
+  width: 50%;
+  max-width: 100%;
+  min-width: 100px;
+  max-height: 80vh;
+  overflow-y: auto;
+  height: auto;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+.modal-content-2{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 10px;
+  width: 50%;
+  max-width: 100%;
+  min-width: 100px;
+  max-height: 90vh;
+  height: auto;
+  overflow-y: auto;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+/* Make the modal display evenly split */
+.modal-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  gap: 50px;
+  padding: 0px 40px;
+  box-sizing: border-box;
+}
+
+
+/* Hide Scrollbar */
+.modal-content {
+  scrollbar-width: none;
+}
+
+.modal-content::-webkit-scrollbar {
+  display: none;
+}
+
+h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: medium;
+  font-weight: 600;
+  padding-left: 15px;
+}
+
+/* Red Banner Styling */
+.red-banner {
+  background-color: #A52424;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+/* Ensure both groups take equal space */
+.group-1, .group-2, .group-3 {
+  display: flex;
+  flex: 1; /* Ensures both sections take equal space */
+  justify-content: center;
+  align-items: center;
+}
+
+.group-2{
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.group-1{
+  margin-top: 10px;
+}
+
+.group-3{
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+/* Make profile sections equal */
+.profile-section, .profile-section-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  flex: 1; /* Ensures equal distribution */
+  gap: 5px;
+}
+
+.profile-section-3{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  flex: 1; /* Ensures equal distribution */
+  gap: 5px;
+  margin-top: 30px;
+}
+
+#viewImage {
+  display: block;
+  margin: 10px auto;
+  max-width: 300px;
+  width: 300px;
+  height: 160px;
+  padding: 0px;
+  margin-top: 15px;
+  border-radius: 5px;
+}
+
+#currentImage{
+  display: block;
+  margin: 10px auto;
+  max-width: 300px;
+  width: 300px;
+  height: 160px;
+  padding: 0px;
+  margin-top: 15px;
+  border-radius: 5px;
+}
+
+
+/* Keep content aligned properly */
+.content-section {
+  display: flex;
+  flex-wrap: wrap; /* Allows fields to wrap if needed */
+  gap: 5px;
+  width: 100%; /* Adapts to parent width */
+  max-width: 800px; /* Matches modal */
+  text-align: left;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* Label styling */
+.heading {
+  font-weight: 500;
+  margin-bottom: 0px;
+  text-align: left;
+  display: block;
+  width: 100%;
+  font-size: 10px;
+  margin-top: 0px;
+}
+
+/* Ensures inputs align properly */
+.styled-input, .styled-input-2, .styled-input-3, .styled-input-4, .styled-input-5{
+    width: 100%;
+    max-width: 400px;
+    height: 30px;
+    padding: 5px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    color: #333;
+    box-sizing: border-box;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 0px;
+}
+
+.styled-input-5{
+  width: 100%;
+    max-width: 400px;
+    height: 100px;
+    padding: 5px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    color: #333;
+    box-sizing: border-box;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Adjust textarea size */
+.styled-input-2 {
+  height: 150px; /* Larger for better usability */
+  overflow: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Hides scrollbar but allows scrolling */
+.styled-input-2::-webkit-scrollbar {
+  display: none;
+}
+
+/* Readonly input fields */
+.styled-input[readonly], .styled-input-2[readonly] {
+  background-color: white;
+  cursor: not-allowed;
+}
+
+
+#editTypeContainer {
+  width: 100%;
+  max-width: 400px;
+  height: 100px; /* Fixed height to prevent automatic resizing */
+  padding: 5px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  color: #333;
+  box-sizing: border-box;
+  overflow-y: auto; /* Scroll when content overflows */
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  gap: 5px; /* Adds space between list items */
+}
+
+#editTypeContainer::-webkit-scrollbar {
+  display: none; /* Hides scrollbar for Chrome, Safari */
+}
+
+#editTypeContainer .item {
+  display: flex;
+  align-items: center; /* Align checkbox and label */
+  gap: 5px; /* Adds spacing between checkbox and label */
+  white-space: nowrap; /* Prevents label from wrapping */
+}
+
+#editTypeContainer .item input[type="checkbox"] {
+  flex-shrink: 0; /* Prevents checkbox from shrinking */
+  margin-left: 5px;
+}
+
+#editTypeContainer .item label {
+  display: inline-block; /* Ensures label stays in line */
+  font-size: 12px; /* Adjust text size if necessary */
+  color: #666; /* Adjust color if needed */
+}
+
+#typeContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px; /* Adds spacing between items */
+}
+
+.item {
+  display: flex;
+  align-items: center; /* Aligns checkbox and label properly */
+  gap: 8px; /* Adjusts space between checkbox and label */
+  white-space: nowrap; /* Prevents label from wrapping */
+  width: fit-content; /* Ensures the div only takes necessary space */
+  margin-left: 10px;
+}
+
+.button-submit{
+  margin-left: 0px;
+  margin-right: 0px;
+  width: 150px;
+  height: 35px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px;
+  background-color: #A52424;
+  margin-top: 15px;
+  border-radius: 30px;
+}
+
+.styled-input[readonly], .styled-input-2[readonly] {
+  background-color: white;
+  cursor: not-allowed;
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+  .modal-display {
+      flex-direction: column;
+      align-items: center;
+  }
+  
+  .group-1, .group-2, .group-3 {
+      width: 100%;
+      justify-content: center;
+  }
+
+  .profile-section, .profile-section-2 {
+      max-width: 100%;
+  }
+}
+
+/* Close Button Styling */
+.close {
+  font-size: 24px; /* Large close icon */
+  font-weight: 600;
+  cursor: pointer; /* Pointer cursor for interaction */
+  margin-left: auto; /* Pushes the button to the right */
+  color: white;
+  float: right;
+  padding-right: 13px;
+}
+
+#closeEditModal, #closeViewModal, #closeAddModal{
+  font-size: larger;
+  padding-right: 15px;
+}
+
+.close:hover, .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Form Styles */
+form input, form select, form button {
+  display: block;
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 10px auto;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+form input:focus, form select:focus {
+  border-color: #4CAF50;
+  outline: none;
+}
+
+form button {
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #45a049;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .container {
+    width: 95%;
+  }
+
+  .modal-content, .modal-content-2 {
+    width: 90%;
+  }
+
+button {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}
+
+/*Checkbox Designs*/
+p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0; /* Remove margin for proper alignment */
+}
+
+.container {
+  display: flex;
+  justify-content: space-between; /* Spread content between left and right */
+  align-items: center; /* Vertically center the items */
+  margin: 25px 25px 20px 25px;
+}
+
+
+.right-side {
+  display: flex;
+  gap: 10px; /* Adds space between input and button */
+  align-items: center; /* Aligns the input and button vertically */
+}
+
+table {
+  width: 100%;
+  margin: 30px auto;
+  border-collapse: separate;
+  border-spacing: 0;  
+  overflow: hidden; 
+  border: 1px solid rgb(218, 218, 218);
+  border-radius: 5px;
+  margin-bottom: 50px !important;
+}
+
+th, td {
+  font-family: 'Poppins', sans-serif;
+  padding: 8px 20px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 500;
+  background-color: #FFFFFF;
+  color: #5B5C5F;
+  border-bottom: 1px solid rgb(218, 218, 218);
+}
+
+th {
+  font-size: 10px;
+  font-weight: 600;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid rgb(218, 218, 218);
+  color: black;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+tr:first-child th:first-child {
+  border-top-left-radius: 5px;
+}
+
+tr:first-child th:last-child {
+  border-top-right-radius: 5px;
+}
+
+tr:last-child td:first-child {
+  border-bottom-left-radius: 5px;
+}
+
+tr:last-child td:last-child {
+  border-bottom-right-radius: 5px;
+}
+
+table, th, tr{
+  margin-top: 0px;
+}
+
+/* Icons Styling */
+.icons {
+  letter-spacing: 8px;
+}
+
+.icons button {
+  background: none;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.icons button i {
+  color: #333;
+  font-size: 13px;
+}
+
+.destination-table{
+  margin: 0px 25px auto;
+  height: 180px;
+}
+
+.modal-activity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dim background */
+}
+
+.modal-content-activity {
+  width: 500px;
+  background: white;
+  border-radius: 5px;
+  text-align: center;
+  height: 150px;
+  /* Center the modal properly */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.red-banner-activity {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #A52424;
+  color: white;
+  padding: 5px 1px;
+  font-size: 12px; /* Reduce font size */
+  border-radius: 5px 5px 0 0;
+}
+
+.red-banner-activity h2 {
+  font-size: 12px; /* Make title smaller */
+  margin: 0;
+  padding-left: 8px;
+}
+
+.close {
+  cursor: pointer;
+  font-size: 14px;
+  padding-right: 8px;
+}
+
+.newActivity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.newActivity input {
+  width: 90%;
+  height: 30px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px; /* Reduce font size */
+  font-weight: 600;
+}
+
+.newActivity button {
+    width: 150px;
+    height: 35px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    background-color: #A52424;
+    border-radius: 30px;
+    border: none;
+    color: white;
+    cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.newActivity button:hover {
+  background: darkred;
+}
+
+
+/**/
+
+.modal-trip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dim background */
+}
+
+.modal-content-trip {
+  width: 500px;
+  background: white;
+  border-radius: 5px;
+  text-align: center;
+  height: 150px;
+  /* Center the modal properly */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.red-banner-trip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #A52424;
+  color: white;
+  padding: 5px 1px;
+  font-size: 12px; /* Reduce font size */
+  border-radius: 5px 5px 0 0;
+}
+
+.red-banner-trip h2 {
+  font-size: 12px; /* Make title smaller */
+  margin: 0;
+  padding-left: 8px;
+}
+
+.close {
+  cursor: pointer;
+  font-size: 14px;
+  padding-right: 8px;
+}
+
+.newTrip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.newTrip input {
+  width: 90%;
+  height: 30px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px; /* Reduce font size */
+  font-weight: 600;
+}
+
+.newTrip button {
+    width: 150px;
+    height: 35px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    background-color: #A52424;
+    border-radius: 30px;
+    border: none;
+    color: white;
+    cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.newTrip button:hover {
+  background: darkred;
+}
+
+.pagination-button {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  background-color: #A52424; /* Default red when active */
+  color: white;
+  border: 0px;
+  border-radius: 3px;
+  font-weight: 400;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer; /* Ensures it's clickable */
+  transition: background-color 0.3s ease;
+  margin: 5px 10px;
+}
+
+.pagination-button:disabled {
+  background-color: #b0b0b0; /* Grey when disabled */
+  color: white;
+  cursor: not-allowed; /* Changes cursor to indicate it's not clickable */
+  opacity: 0.7;
+}
+

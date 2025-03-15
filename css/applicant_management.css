@@ -1,0 +1,651 @@
+body {
+    background-color: #F0F0F0;
+    transition: margin-left 0.3s ease;
+    margin: 0px;
+}
+
+img {
+    padding: 20px 80px 50px 80px;
+    width: 120px;
+    text-align: center;
+    transition: width 0.3s ease; /* Smooth transition for image size */
+}
+
+#applicantmanagement {
+    background-color: rgba(165, 36, 36, 0.2);
+    color: #A52424;
+    border-radius: 5px;
+    width: 220px;
+}
+
+.link {
+    display: block;
+    padding: 15px 0px 15px 35px;
+    color: #848490;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 15px;
+    transition: all 0.3s ease; /* Smooth transition for hover and padding */
+}
+
+.link:hover {
+    color: #A52424;
+    background-color: rgba(165, 36, 36, 0.2);
+    width: 200px;
+    padding-left: 50px;
+    border-radius: 5px;
+}
+
+.link i {
+    font-size: 15px;
+    margin-right: 13px;
+    transition: color 0.3s ease;
+}
+
+.link:hover i {
+    color: #A52424;
+}
+
+
+@media (max-width: 768px) {
+    nav {
+        width: 200px; 
+    }
+
+    body {
+        margin-left: 200px; 
+    }
+
+    img {
+        width: 100px; 
+        padding: 15px 60px; 
+    }
+
+    #applicantmanagement {
+        width: 180px;
+        padding-left: 40px; 
+    }
+
+    .link {
+        font-size: 12px;
+        padding: 10px 0px 10px 25px; 
+    }
+
+    .link:hover {
+        width: 160px;
+        padding-left: 35px; 
+    }
+}
+
+/* Mobile View */
+@media (max-width: 480px) {
+    nav {
+        width: 100px; 
+    }
+
+    body {
+        margin-left: 100px; 
+    }
+
+    img {
+        width: 80px;
+        padding: 10px;
+    }
+
+    #applicantmanagement {
+        width: 90px;
+        padding-left: 20px; 
+    }
+
+    .link {
+        font-size: 10px; 
+        padding: 8px 0px 8px 15px; 
+    }
+
+    .link:hover {
+        width: 90px; 
+        padding-left: 25px; 
+    }
+}   
+
+/* Table Styling */
+table {
+    width:98%;
+    margin:20px auto;
+    border-collapse: separate;
+    border-spacing: 0;  
+    overflow: hidden; 
+    border: 1px solid rgb(218, 218, 218);
+    border-radius: 5px;
+    align-items: center;
+}
+
+th, td {
+    font-family: 'Poppins', sans-serif;
+    padding: 8px 20px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 500;
+    background-color: #FFFFFF;
+    color: #5B5C5F;
+    border-bottom: 1px solid rgb(218, 218, 218);
+}
+
+th {
+    font-size: 10px;
+    font-weight: 600;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid rgb(218, 218, 218);
+    color: black;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+tr:first-child th:first-child {
+    border-top-left-radius: 5px;
+}
+
+tr:first-child th:last-child {
+    border-top-right-radius: 5px;
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: 5px;
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: 5px;
+}
+
+table, th, tr{
+    margin-top: 0px;
+}
+
+/* Icons Styling */
+.icons {
+    letter-spacing: 8px;
+}
+
+.icons button {
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.icons button i {
+    color: #333;
+    font-size: 13px;
+}
+
+/* Banner Styling */
+.banner {
+    height: 73px;
+    width: 100%;
+    background-color: #A52424;
+}
+
+/* Paragraph Styling */
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+/* Main Content Styling */
+.main-content {
+    margin-left: 280px;
+}
+
+/* Container Layout */
+.container {
+    width: 98%;
+    margin: 10px auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between; /* Aligns buttons to the left and search bar to the right */
+    align-items: center;
+    width: 98%;
+    margin: 10px auto;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px; /* Spacing between buttons */
+}
+
+#searchBarContainer input {
+    padding: 8px;
+    width: 280px;
+    border: 1px solid rgb(218, 218, 218);
+    border-radius: 3px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    color: #848490;
+    max-height: 32.4px !important;
+}
+
+.modal {
+    display: none; /* Initially hidden */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 10px;
+    width: 50%;
+    max-width: 100%;
+    min-width: 100px;
+    max-height: 90vh;
+    overflow-y: auto;
+    height: auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: medium;
+    font-weight: 600;
+    padding-left: 15px;
+}
+
+/* Red Banner Styling */
+.red-banner {
+    background-color: #A52424;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+/* Hide Scrollbar */
+.modal-content {
+    scrollbar-width: none;
+}
+
+.modal-content::-webkit-scrollbar {
+    display: none;
+}
+
+.modal-display{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    gap: 50px;
+    padding: 0px 40px;
+    box-sizing: border-box;
+}
+
+.group-1, .group-2{
+    display: flex;
+    flex: 1; /* Ensures both sections take equal space */
+    justify-content: center;
+    align-items: center;
+}
+
+.group-1{
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.group-2{
+    margin-top: 10px;
+}
+
+.profile-section, .profile-section-2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    flex: 1; /* Ensures equal distribution */
+    gap: 5px;
+}
+
+.profile-section-2{
+    margin: 12px 0px;
+}
+
+#applicantProfilePicture{
+    display: block;
+    margin: 0 auto;
+    max-width: 150px;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    padding-bottom: 13px;
+}
+
+#applicantIDPicture{
+    display: block;
+    margin: 10px auto;
+    max-width: 300px;
+    width: 300px;
+    height: 160px;
+    padding: 0px;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
+#declinedApplicantProfilePicture{
+    display: block;
+    margin: 0 auto;
+    max-width: 150px;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    padding-bottom: 13px;
+}
+
+#declinedApplicantIDPicture{
+    display: block;
+    margin: 10px auto;
+    max-width: 300px;
+    width: 300px;
+    height: 160px;
+    padding: 0px;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
+/* Ensures modal content is responsive */
+.modal-container {
+    width: 90%;
+    max-width: 800px; /* Keeps it manageable on larger screens */
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+
+/* Main content layout */
+.content-section {
+    display: flex;
+    flex-wrap: wrap; /* Allows fields to wrap if needed */
+    gap: 5px;
+    width: 100%; /* Adapts to parent width */
+    max-width: 800px; /* Matches modal */
+    text-align: left;
+    align-items: flex-start;
+}
+
+/* Label styling */
+.heading {
+    font-weight: 500;
+    margin-bottom: 0px;
+    text-align: left;
+    display: block;
+    width: 100%;
+    font-size: 10px;
+    margin-top: 0px;
+}
+
+/* Ensures inputs align properly */
+.styled-input, .styled-input-2, .styled-input-3 {
+    width: 100%;
+    max-width: 100%; /* Responsive */
+    height: 30px;
+    padding: 7px 10px;
+    font-size: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    color: #333;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    margin: 0px;
+}
+
+/* Adjust textarea size */
+.styled-input-3 {
+    height: 100px; /* Larger for better usability */
+    overflow: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Hides scrollbar but allows scrolling */
+.styled-input-3::-webkit-scrollbar {
+    display: none;
+}
+
+/* Readonly input fields */
+.styled-input[readonly], .styled-input-2[readonly] {
+    background-color: white;
+    cursor: not-allowed;
+}
+
+/* Ensures layout is responsive on smaller screens */
+@media (max-width: 600px) {
+    .content-section {
+        flex-direction: column; /* Stack fields */
+        width: 100%;
+    }
+
+    .modal-container {
+        width: 95%;
+    }
+}
+
+/* Center align the button and add spacing */
+#archiveButton {
+    display: block;
+    width: 200px;
+    padding: 10px;
+    background-color: #8B2E2E; /* Adjust to match your design */
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 10px auto 0; /* Centers button */
+    text-align: center;
+    margin-top: 10px !important;
+}
+
+.archive-button:hover {
+    background-color: #6b1e1e;
+}
+
+
+@media (max-width: 768px) {
+    .modal-display {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .group-1, .group-2 {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .profile-section, .profile-section-2 {
+        max-width: 100%;
+    }
+}
+
+.close {
+    font-size: 24px; /* Large close icon */
+    font-weight: 600;
+    cursor: pointer; /* Pointer cursor for interaction */
+    margin-left: auto; /* Pushes the button to the right */
+    color: white;
+    float: right;
+    padding-right: 13px;
+}
+
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button {
+    font-size: 12px;
+    padding: 6px 10px;
+}
+
+
+textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: none;
+}
+
+
+#viewPendingApplicants{
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    color:white;
+    height: 32px;
+    border-radius: 3px;
+    border: 1px solid rgb(218, 218, 218);
+    margin-top: 0px;
+    padding: 10px;
+    background-color: #A52424;
+}
+
+#viewDeclinedApplicants{
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    color: #333;
+    height: 32px;
+    border-radius: 3px;
+    border: 1px solid rgb(218, 218, 218);
+    margin-top: 0px;
+    margin-right: 10px;
+    padding: 10px;
+    background-color: white;
+}
+
+#approveButton, #declineButton{
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 150px;
+    height: 35px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px;
+    background-color: #A52424;
+    margin-top: 15px;
+    border-radius: 30px;
+    border: 0px;
+    color: white;
+}
+
+#archiveButton{
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 150px;
+    height: 35px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px;
+    background-color: #A52424;
+    margin-top: 15px;
+    border-radius: 30px;
+    border: 0px;
+    color: white;
+}
+
+.sure {
+    text-align: center;
+    font-weight: 600;
+    margin: 30px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;  /* Centers buttons horizontally */
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.cancelApprove, #confirmApproveButton {
+    width: 150px;
+    height: 35px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px;
+    background-color: #A52424;
+    border-radius: 30px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.cancelApprove{
+    background-color: #EAEAEA;
+    color: #A52424;
+}
+
+.textarea-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+#declineReason {
+    width: 700px;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    resize: none; /* Prevent resizing */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+#submitDeclineReason, .close-modal {
+    width: 150px;
+    height: 35px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    background-color: #A52424;
+    border-radius: 30px;
+    border: none;
+    color: white;
+    cursor: pointer;
+}

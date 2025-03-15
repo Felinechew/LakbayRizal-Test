@@ -1,0 +1,285 @@
+body {
+    background-color: #F0F0F0;
+    transition: margin-left 0.3s ease;
+    margin: 0px;
+}
+
+img {
+    padding: 20px 80px 50px 80px;
+    width: 120px;
+    text-align: center;
+    transition: width 0.3s ease; /* Smooth transition for image size */
+}
+
+#dashboard {
+    background-color: rgba(165, 36, 36, 0.2);
+    color: #A52424;
+    border-radius: 5px;
+    width: 220px;
+}
+
+.link {
+    display: block;
+    padding: 15px 0px 15px 35px;
+    color: #848490;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 15px;
+    transition: all 0.3s ease; /* Smooth transition for hover and padding */
+}
+
+.link:hover {
+    color: #A52424;
+    background-color: rgba(165, 36, 36, 0.2);
+    width: 200px;
+    padding-left: 50px;
+    border-radius: 5px;
+}
+
+.link i {
+    font-size: 15px;
+    margin-right: 13px;
+    transition: color 0.3s ease;
+}
+
+.link:hover i {
+    color: #A52424;
+}
+
+/* Media Queries for Responsiveness */
+
+/* Tablet View */
+@media (max-width: 768px) {
+    nav {
+        width: 200px; /* Adjust sidebar width */
+    }
+
+    body {
+        margin-left: 200px; /* Adjust margin for smaller nav */
+    }
+
+    img {
+        width: 100px; /* Adjust logo size */
+        padding: 15px 60px; /* Adjust padding for smaller screens */
+    }
+
+    #dashboard {
+        width: 180px; /* Adjust width for smaller screens */
+        padding-left: 40px; /* Adjust padding */
+    }
+
+    .link {
+        font-size: 12px; /* Adjust font size */
+        padding: 10px 0px 10px 25px; /* Adjust padding */
+    }
+
+    .link:hover {
+        width: 160px; /* Adjust hover width */
+        padding-left: 35px; /* Adjust hover padding */
+    }
+}
+
+/* Mobile View */
+@media (max-width: 480px) {
+    nav {
+        width: 100px; /* Compact navigation for mobile */
+    }
+
+    body {
+        margin-left: 100px; /* Adjust body margin for mobile */
+    }
+
+    img {
+        width: 80px; /* Smaller logo */
+        padding: 10px; /* Adjust padding */
+    }
+
+    #dashboard {
+        width: 90px; /* Compact dashboard width */
+        padding-left: 20px; /* Adjust padding */
+    }
+
+    .link {
+        font-size: 10px; /* Smaller font size */
+        padding: 8px 0px 8px 15px; /* Compact padding */
+    }
+
+    .link:hover {
+        width: 90px; /* Compact hover state */
+        padding-left: 25px; /* Adjust hover padding */
+    }
+}   
+
+
+.banner{
+    height: 150px;
+    width: 100%;
+    background-color: #A52424;
+}
+
+h1{
+    font-family: 'Poppins', sans-serif;
+    color: #FFFFFF;
+    padding-left: 50px;
+    padding-top: 25px;
+    font-weight: 600;
+    margin: 0px;
+}
+
+p{
+    font-family: 'Poppins', sans-serif;
+    color: #FFFFFF;
+    padding-left: 50px;
+    padding-top: 5px;
+    font-size: smaller;
+    margin: 0px;
+}
+
+.container-travelers {
+    background-color: white;
+    width: 350px;
+    height: 150px;
+    border: 1px solid rgb(199, 199, 204);
+    border-radius: 3px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+}
+
+.main-content{
+    margin-left: 280px;
+}
+
+.container-travelers {
+    background-color: white;
+    width: 350px;
+    height: 150px;
+    border: 1px solid rgb(199, 199, 204);
+    border-radius: 3px;
+    margin-bottom: 40px;
+    margin-right: 40px;
+    position: relative; /* Enable precise positioning */
+    display: flex; /* Use Flexbox for layout */
+    align-items: flex-start; /* Align content to the top */
+    padding: 10px; /* Add padding for inner spacing */
+    box-sizing: border-box; /* Include padding in the container dimensions */
+}
+
+i#container-icon.fa-solid.fa-users {
+    color: #A52424;
+    font-size: 70px;
+    margin-left: 25px; /* Increased left margin for spacing */
+    margin-right: 10px; /* Space between the icon and the text */
+    padding-top: 10px; /* Add some spacing from the top of the container */
+    margin-top: 20px;
+}
+
+.registered-traveler{
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    margin: 0; /* Remove default margin */
+    position: absolute; /* Position text in the top right */
+    right:50px; /* Distance from the right edge */
+    top: 30px; /* Distance from the top edge */
+}
+
+i#container-icon.fa-solid.fa-user-tie {
+    color: #A52424;
+    font-size: 70px;
+    margin-left: 35px; /* Increased left margin for spacing */
+    margin-right: 10px; /* Space between the icon and the text */
+    padding-top: 10px; /* Add some spacing from the top of the container */
+    margin-top: 20px;
+}
+
+.registered-tourguide{
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    margin: 0; /* Remove default margin */
+    position: absolute; /* Position text in the top right */
+    right:47px; /* Distance from the right edge */
+    top: 30px; /* Distance from the top edge */
+}
+
+i#container-icon.fa-solid.fa-user-tie {
+    color: #A52424;
+    font-size: 70px;
+    margin-left: 30px; /* Increased left margin for spacing */
+    margin-right: 10px; /* Space between the icon and the text */
+    padding-top: 10px; /* Add some spacing from the top of the container */
+    margin-top: 20px;
+}
+
+.tourguide-applicants{
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    margin: 0; /* Remove default margin */
+    position: absolute; /* Position text in the top right */
+    right:47px; /* Distance from the right edge */
+    top: 30px; /* Distance from the top edge */
+}
+
+i#container-icon.fa-solid.fa-clipboard{
+    color: #A52424;
+    font-size: 70px;
+    margin-left: 35px; /* Increased left margin for spacing */
+    margin-right: 0px; /* Space between the icon and the text */
+    padding-top: 10px; /* Add some spacing from the top of the container */
+    margin-top: 20px;
+}
+
+i#container-icon.fa-solid.fa-location-pin {
+    color: #A52424;
+    font-size: 70px;
+    margin-left: 35px; /* Move icon slightly to the right */
+    padding-top: 10px; /* Add spacing from the top */
+    margin-top: 20px; /* Additional vertical margin */
+}
+
+.generated-itineraries {
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    margin: 0; /* Remove default margin */
+    position: absolute; /* Position text */
+    right: 47px; /* Distance from the right edge */
+    top: 30px; /* Distance from the top edge */
+}
+
+.view-generated {
+    font-family: 'Poppins', sans-serif;
+    color: #A52424;
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Add emphasis to the link */
+    font-size: 12px;
+    position: absolute; /* Position link at the bottom right */
+    bottom: 10px; /* Distance from the bottom edge */
+    right: 20px; /* Distance from the right edge */
+    transition: color 0.3s ease; /* Smooth color change on hover */
+    text-decoration: underline;
+}
+
+.view-generated:hover {
+    color: #871d1d; /* Darker color on hover */
+}
+
+.table-container{
+    margin-left: 450px;
+}
+
+.top-rated{
+    color: black;
+    text-align: left;
+    padding-left: 0px;
+}
+

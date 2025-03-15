@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promotions Management</title>
+    <link rel="stylesheet" href="../css/settings.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .search-add {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        #searchInput {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 200px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #e0e0e0;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: 500;
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            gap: 8px;
+        }
+        .pagination button {
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+        }
+        .pagination button.active {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .modal-header {
+            background-color: #B22222;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .close {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .modal-body {
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+        }
+        .image-upload {
+            flex: 0 0 300px;
+            background: #f5f5f5;
+            border: 2px dashed #ddd;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+            cursor: pointer;
+        }
+        .image-upload img {
+            max-width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+        }
+        .form-section {
+            flex: 1;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .btn-primary {
+            background-color: #B22222;
+            color: white;
+            border: none;
+        }
+        .btn-outline {
+            background-color: white;
+            border: 1px solid #ddd;
+        }
+        .actions-cell {
+            display: flex;
+            gap: 8px;
+        }
+        .actions-cell button {
+            padding: 4px 8px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .image-preview {
+            flex: 0 0 300px;
+            margin-right: 20px;
+        }
+        .image-preview img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        #viewModal .form-group input {
+            background-color: #f5f5f5;
+            cursor: not-allowed;
+        }
+        .btn-outline {
+            background-color: #f5f5f5;
+            color: #666;
+        }
+        /* Add these styles to your existing CSS */
+        .dashboard-container {
+            display: flex;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 15px;
+            background-color: #f0f0f0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .back-button svg {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="logo">
+                <h1>Admin Dashboard</h1>
+            </div>
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">User Management</a></li>
+                <li><a href="#">Applicant Management</a></li>
+                <li><a href="#">Payment Management</a></li>
+                <li><a href="#">Booking Management</a></li>
+                <li><a href="#">Invoice Template</a></li>
+                <li><a href="#">Feedback</a></li>
+                <li><a href="#">Archives</a></li>
+                <li><a href="#">Reports</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+            <button id="logoutBtn">Logout</button>
+        </div>
+        <div class="main-content">
+            <button class="back-button" onclick="window.location.href='settings.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Back to Settings
+            </button>
+            <div class="container">
+                <div class="header">
+                    <h1>Promotions</h1>
+                    <div class="search-add">
+                        <input type="text" id="searchInput" placeholder="Search">
+                        <button class="btn btn-primary" onclick="openModal()">Add</button>
+                    </div>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Company</th>
+                            <th>Date Added</th>
+                            <th>End Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="promotionsTableBody">
+                        <!-- Table data will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+
+                <div class="pagination">
+                    <button onclick="prevPage()">&lt;</button>
+                    <button class="active">1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button onclick="nextPage()">&gt;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Modal -->
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Advertisement</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="image-upload" onclick="document.getElementById('imageInput').click()">
+                    <input type="file" id="imageInput" hidden accept="image/*" onchange="handleImageUpload(event)">
+                    <div id="uploadPlaceholder">
+                        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="17 8 12 3 7 8"/>
+                            <line x1="12" y1="3" x2="12" y2="15"/>
+                        </svg>
+                        <p>Click to upload image</p>
+                    </div>
+                    <img id="previewImage" style="display: none;">
+                </div>
+                <form id="promotionForm" class="form-section">
+                    <div class="form-group">
+                        <label for="companyName">Company Name</label>
+                        <input type="text" id="companyName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="municipality">Municipality</label>
+                        <select id="municipality" required>
+                            <option value="" disabled selected>Municipality</option>
+                            <option value="Angono">Angono</option>
+                            <option value="Antipolo">Antipolo</option>
+                            <option value="Baras">Baras</option>
+                            <option value="Binangonan">Binangonan</option>
+                            <option value="Cainta">Cainta</option>
+                            <option value="Cardona">Cardona</option>
+                            <option value="Jala-Jala">Jala-Jala</option>
+                            <option value="Morong">Morong</option>
+                            <option value="Pililla">Pililla</option>
+                            <option value="Rodriguez">Rodriguez</option>
+                            <option value="San Mateo">San Mateo</option>
+                            <option value="Tanay">Tanay</option>
+                            <option value="Taytay">Taytay</option>
+                            <option value="Teresa">Teresa</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateAdded">Date Added</label>
+                        <input type="date" id="dateAdded" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate">End Date</label>
+                        <input type="date" id="endDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="promoLink">Link</label>
+                        <input type="url" id="promoLink" placeholder="Paste link here..." required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Modal -->
+    <div id="viewModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>View Advertisement Details</h2>
+                <span class="close" onclick="closeViewModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="image-preview">
+                    <img id="viewImage" alt="Advertisement Image">
+                </div>
+                <div class="form-section">
+                    <div class="form-group">
+                        <label>ID</label>
+                        <input type="text" id="viewId" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Company Name</label>
+                        <input type="text" id="viewCompanyName" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Municipality</label>
+                        <input type="text" id="viewMunicipality" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Date Added</label>
+                        <input type="text" id="viewDateAdded" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>End Date</label>
+                        <input type="text" id="viewEndDate" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Link</label>
+                        <input type="text" id="viewLink" readonly>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn btn-outline" onclick="archiveFromView()">Archive</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Advertisement</h2>
+                <span class="close" onclick="closeEditModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="image-upload" onclick="document.getElementById('editImageInput').click()">
+                    <input type="file" id="editImageInput" hidden accept="image/*" onchange="handleEditImageUpload(event)">
+                    <div id="editUploadPlaceholder">
+                        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="17 8 12 3 7 8"/>
+                            <line x1="12" y1="3" x2="12" y2="15"/>
+                        </svg>
+                        <p>Click to upload image</p>
+                    </div>
+                    <img id="editPreviewImage" style="display: none;">
+                </div>
+                <form id="editPromotionForm" class="form-section">
+                    <input type="hidden" id="editId">
+                    <div class="form-group">
+                        <label for="editCompanyName">Company Name</label>
+                        <input type="text" id="editCompanyName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editMunicipality">Municipality</label>
+                        <select id="editMunicipality" required>
+                            <option value="" disabled selected>Municipality</option>
+                            <option value="Angono">Angono</option>
+                            <option value="Antipolo">Antipolo</option>
+                            <option value="Baras">Baras</option>
+                            <option value="Binangonan">Binangonan</option>
+                            <option value="Cainta">Cainta</option>
+                            <option value="Cardona">Cardona</option>
+                            <option value="Jala-Jala">Jala-Jala</option>
+                            <option value="Morong">Morong</option>
+                            <option value="Pililla">Pililla</option>
+                            <option value="Rodriguez">Rodriguez</option>
+                            <option value="San Mateo">San Mateo</option>
+                            <option value="Tanay">Tanay</option>
+                            <option value="Taytay">Taytay</option>
+                            <option value="Teresa">Teresa</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editDateAdded">Date Added</label>
+                        <input type="date" id="editDateAdded" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editEndDate">End Date</label>
+                        <input type="date" id="editEndDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPromoLink">Link</label>
+                        <input type="url" id="editPromoLink" placeholder="Paste link here..." required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="../scripts/promotions.js"></script>
+</body>
+</html>

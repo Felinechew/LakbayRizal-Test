@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Settings</title>
+    <link rel="stylesheet" href="../css/settings.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="logo">
+                <h1>Admin Dashboard</h1>
+            </div>
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">User Management</a></li>
+                <li><a href="#">Applicant Management</a></li>
+                <li><a href="#">Payment Management</a></li>
+                <li><a href="#">Booking Management</a></li>
+                <li><a href="#">Invoice Template</a></li>
+                <li><a href="#">Feedback</a></li>
+                <li><a href="#">Archives</a></li>
+                <li><a href="#">Reports</a></li>
+                <li class="active"><a href="../html/settings.html">Settings</a></li>
+            </ul>
+            <button id="logoutBtn">Logout</button>
+        </div>
+        <div class="main-content">
+            <div class="page-header">
+                <h1>App Settings</h1>
+                <button class="back-button" onclick="window.location.href='settings.html'">Back to Settings</button>
+            </div>
+            
+            <div class="settings-sections">
+                <!-- App Logo Section -->
+                <div class="settings-section full-width">
+                    <h2>App Logo</h2>
+                    <p class="section-description">Update the logo for your web and mobile applications</p>
+                    <div class="logo-container">
+                        <div id="logoPreview" class="logo-preview">
+                            <img alt="Current Logo" id="currentLogo">
+                        </div>
+                        <div class="logo-upload">
+                            <form id="logoForm">
+                                <div class="form-group">
+                                    <label for="appLogo">Upload New Logo</label>
+                                    <input type="file" id="appLogo" class="form-control" accept="image/*">
+                                    <p class="help-text">Recommended size: 200x100 pixels, PNG or JPG format</p>
+                                </div>
+                                <button type="submit" class="action-button">Update Logo</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tourism Offices Section -->
+                <div class="settings-section full-width">
+                    <div class="section-header">
+                        <h2>Tourism Offices</h2>
+                        <button id="addOfficeBtn" class="add-button">Add Office</button>
+                    </div>
+                    <p class="section-description">Manage tourism offices and their information</p>
+                    
+                    <div class="search-filter">
+                        <input type="text" id="officeSearch" placeholder="Search offices..." class="search-input">
+                    </div>
+                    
+                    <div class="table-container">
+                        <table id="officesTable" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Office Name</th>
+                                    <th>Location</th>
+                                    <th>Contact</th>
+                                    <th>Email</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="officesTableBody">
+                                <!-- Table rows will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination controls -->
+                    <div class="pagination">
+                        <button id="prevPage" class="pagination-btn">Previous</button>
+                        <span id="pageInfo">Page 1 of 1</span>
+                        <button id="nextPage" class="pagination-btn">Next</button>
+                    </div>
+                </div>
+
+                <!-- FAQs Section -->
+                <div class="settings-section full-width">
+                    <div class="section-header">
+                        <h2>Frequently Asked Questions</h2>
+                        <button id="addFaqBtn" class="add-button">Add FAQ</button>
+                    </div>
+                    <p class="section-description">Manage FAQs for your application</p>
+                    
+                    <div class="search-filter">
+                        <input type="text" id="faqSearch" placeholder="Search FAQs..." class="search-input">
+                        <select id="faqCategory" class="filter-select">
+                            <option value="all">All Categories</option>
+                            <option value="general">General</option>
+                            <option value="booking">Booking</option>
+                            <option value="payment">Payment</option>
+                            <option value="account">Account</option>
+                        </select>
+                    </div>
+                    
+                    <div id="faqAccordion" class="faq-accordion">
+                        <!-- FAQ items will be populated by JavaScript -->
+                    </div>
+                    
+                    <!-- Pagination controls -->
+                    <div class="pagination">
+                        <button id="prevFaqPage" class="pagination-btn">Previous</button>
+                        <span id="faqPageInfo">Page 1 of 1</span>
+                        <button id="nextFaqPage" class="pagination-btn">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tourism Office Modal -->
+    <div id="officeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="officeModalTitle">Add Tourism Office</h2>
+                <span class="close" id="closeOfficeModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="officeForm">
+                    <input type="hidden" id="officeId">
+                    <div class="form-group">
+                        <label for="officeName">Office Name*</label>
+                        <input type="text" id="officeName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="officeLocation">Location*</label>
+                        <input type="text" id="officeLocation" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="officeContact">Contact*</label>
+                        <input type="tel" id="officeContact" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="officeEmail">Email*</label>
+                        <input type="email" id="officeEmail" class="form-control" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" id="cancelOfficeBtn" class="cancel-button">Cancel</button>
+                        <button type="submit" class="submit-button">Save Office</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Modal -->
+    <div id="faqModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="faqModalTitle">Add FAQ</h2>
+                <span class="close" id="closeFaqModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="faqForm">
+                    <input type="hidden" id="faqId">
+                    <div class="form-group">
+                        <label for="faqQuestion">Question*</label>
+                        <input type="text" id="faqQuestion" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="faqAnswer">Answer*</label>
+                        <textarea id="faqAnswer" class="form-control" rows="4" required></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" id="cancelFaqBtn" class="cancel-button">Cancel</button>
+                        <button type="submit" class="submit-button">Save FAQ</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteConfirmModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Archive Confirmation</h2>
+                <span class="close" id="closeDeleteModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id="deleteConfirmMessage">Are you sure you want to archive this item?</p>
+                <div class="form-actions">
+                    <button type="button" id="cancelDeleteBtn" class="cancel-button">Cancel</button>
+                    <button type="button" id="confirmDeleteBtn" class="submit-button">Archive</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../scripts/appsettings.js"></script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+/* Reset and Base Styles */
+* {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    background-color: #f5f5f5;
+    height: 100dvh; /* Uses dynamic viewport height */
+}
+
+/* Logo Section */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.logo-container img {
+    height: auto;
+    max-height: 200px;
+    width: auto;
+    max-width: 80%;
+    object-fit: contain;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-container img:hover {
+    transform: scale(1.05);
+}
+
+/* Form Container */
+.form-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Input Groups */
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-group p {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+/* Input Container */
+.input-container {
+    position: relative;
+    width: 100%;
+}
+
+.input-container input {
+    width: 100%;
+    padding: 0.875rem 1rem 0.875rem 3rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: #1f2937;
+    background-color: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.input-container input:hover {
+    border-color: #d1d5db;
+}
+
+.input-container input:focus {
+    outline: none;
+    border-color: #A52424;
+    box-shadow: 0 0 0 3px rgba(165, 36, 36, 0.1);
+}
+
+/* Icons */
+.input-container i {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: #A52424;
+    transition: color 0.2s ease;
+}
+
+.input-container input:focus + i {
+    color: #871d1d;
+}
+
+/* Button Styles */
+.button-container {
+    margin-top: 2rem;
+}
+
+.button-container button {
+    width: 100%;
+    padding: 0.875rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: white;
+    background-color: #A52424;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.button-container button:hover {
+    background-color: #871d1d;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(165, 36, 36, 0.1),
+                0 2px 4px -1px rgba(165, 36, 36, 0.06);
+}
+
+.button-container button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Error Message Styling */
+#signInMessage {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+#signInMessage.error {
+    color: #dc2626;
+}
+
+#signInMessage.success {
+    color: #059669;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-container {
+        max-width: 90%;
+        padding: 1.5rem;
+    }
+
+    .logo-container img {
+        max-height: 100px;
+        margin-top: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        max-width: 100%;
+        padding: 1rem;
+        border-radius: 0;
+    }
+
+    .logo-container {
+        padding: 1rem;
+    }
+
+    .logo-container img {
+        max-height: 80px;
+        margin-top: 1rem;
+    }
+
+    .input-group p {
+        font-size: 0.813rem;
+    }
+
+    .input-container input {
+        padding: 0.75rem 1rem 0.75rem 2.5rem;
+        font-size: 0.813rem;
+    }
+
+    .button-container button {
+        padding: 0.75rem;
+        font-size: 0.813rem;
+    }
+}
+
+/* Animation for Form Elements */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-container > * {
+    animation: fadeIn 0.3s ease-out forwards;
+}
